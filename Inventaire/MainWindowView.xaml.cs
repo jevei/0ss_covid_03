@@ -14,7 +14,7 @@ namespace Inventaire
         public MainWindowView()
         {
             InitializeComponent();
-            //test
+            
             DataContext = new MainViewModel();
         }
 
