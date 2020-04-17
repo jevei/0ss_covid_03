@@ -36,6 +36,7 @@ namespace BillingManagement.UI.ViewModels
 			invoiceViewModel = new InvoiceViewModel(customerViewModel.Customers);
 			NewInvoiceCommand = new RelayCommand(NewInvoice,CanExecuteNewInvoice);
 			DisplayInvoiceCommand = new RelayCommand(DisplayInvoice);
+			DisplayCustomerCommand = new RelayCommand(DisplayCustomer, CanExecuteDisplayCustomer);
 			VM = customerViewModel;
 
 		}
@@ -73,6 +74,16 @@ namespace BillingManagement.UI.ViewModels
 			DisplayInvoice(invoice);
 		}
 		private bool CanExecuteNewInvoice(object c)
+		{
+			return c == null ? false : true;
+		}
+		private void DisplayCustomer(object c)
+		{
+			Customer customer = (Customer)c;
+			customerViewModel.SelectedCustomer = customer;
+			VM = customerViewModel;
+		}
+		private bool CanExecuteDisplayCustomer(object c)
 		{
 			return c == null ? false : true;
 		}
