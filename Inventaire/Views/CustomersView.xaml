@@ -41,6 +41,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -76,6 +77,7 @@
                 <TextBlock Text="Code postal :" Width="75"/>
                 <TextBox MinWidth="125" Text="{Binding SelectedCustomer.PostalCode}"/>
             </StackPanel>
+
             <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                             Orientation="Horizontal" Margin="3">
                 <TextBlock Text="Contact :" Width="75"/>
@@ -86,17 +88,31 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-
-            </StackPanel>
-
-
-            <StackPanel Grid.Row="7" Grid.Column="2" Margin="6">
-                <Button Content="Supprimer client" Command="{Binding DeleteCustomerCommand}" CommandParameter="{Binding SelectedCustomer}"/>
-            </StackPanel>
-            <Image Margin="6" Grid.Row="8"
+                <Image Margin="6" Grid.Row="8"
                        Source="{Binding SelectedCustomer.PicturePath}"
                        Stretch="Uniform"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Margin="10">
+                <Button Content="Nouvelle facture" Width="150" HorizontalAlignment="Left"/>
+                <DataGrid ItemsSource="{Binding SelectedCustomer.Invoices}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Facture" Binding="{Binding CreationDateTime}"/>
+                        <DataGridTextColumn Header="Total" Binding="{Binding Total,StringFormat={}{0:C}}"/>
+                        <DataGridTemplateColumn Header="Actions">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Voir"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="9" Grid.Column="1" Margin="6">
+                <Button Content="Supprimer client" Command="{Binding DeleteCustomerCommand}" CommandParameter="{Binding SelectedCustomer}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
